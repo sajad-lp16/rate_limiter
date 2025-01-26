@@ -1,4 +1,8 @@
 from abc import ABC
+from typing import (
+    Any,
+    Callable,
+)
 
 
 class BaseProvider(ABC):
@@ -8,7 +12,8 @@ class BaseProvider(ABC):
     field_2_validator:
         maps the value given for a field to it validator
     """
-    def validate_fields(self, field_2_validator) -> None:
+
+    def validate_fields(self, field_2_validator: dict[Any, Callable]) -> None:
         errors = {}
 
         for value, validator in field_2_validator.items():

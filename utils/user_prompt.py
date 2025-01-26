@@ -1,16 +1,19 @@
-from typing import Any
+from typing import (
+    Any,
+    Callable
+)
+
 from utils.functions import parse_headers, parse_config_file
 from utils.validators import (
     is_positive_int,
     is_normal_int,
     is_non_blank_string,
-    is_string_key_value_dict,
     is_valid_url,
     is_valid_rate_limit, is_colon_separated_key_value
 )
 
 
-def hint():
+def hint() -> None:
     print(
         "welcome :)\n"
         "in order to run the service choose one of below\n"
@@ -19,7 +22,7 @@ def hint():
     )
 
 
-def _get_coerced_input(type_: Any, prompt_message: str, validator=None) -> Any | None:
+def _get_coerced_input(type_: Any, prompt_message: str, validator: Callable | None = None) -> Any:
     while True:
         user_input = input(prompt_message)
         try:
@@ -81,7 +84,7 @@ OPTION_2_CONFIG_FUNCTION = {
 }
 
 
-def load_config():
+def load_config() -> dict:
     hint()
     option = option_prompt()
     config_function = OPTION_2_CONFIG_FUNCTION[option]

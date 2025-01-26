@@ -49,11 +49,11 @@ class ProviderWorker(BaseProvider):
         self._requests_queue = PriorityQueue(maxsize=100_000)
         self._is_active = True
 
-    def run(self):
+    def run(self) -> None:
         self._is_active = True
         asyncio.create_task(self.spawn_request_processors())
 
-    def stop(self):
+    def stop(self) -> None:
         self._is_active = False
 
     async def perform_request(self, request: Request) -> None:
@@ -62,7 +62,7 @@ class ProviderWorker(BaseProvider):
 
         await self.insert_to_queue(request)
 
-    async def spawn_request_processors(self):
+    async def spawn_request_processors(self) -> None:
         while self._is_active:
             if self.request_controller.is_locked:
                 suspend_delay = self.request_controller.get_suspend_time()
@@ -71,7 +71,7 @@ class ProviderWorker(BaseProvider):
             request = await self._requests_queue.get()
             _ = asyncio.create_task(self.process_request(request))
 
-    async def process_request(self, request: Request):
+    async def process_request(self, request: Request) -> None:
         if request.execution_time is not None:
             if not request.execution_time <= datetime.now():
                 execution_delay = (request.execution_time - datetime.now()).total_seconds()
@@ -104,9 +104,9 @@ class ProviderWorker(BaseProvider):
                   f"any way the task is not canceled but it might take very long!")
             await insertion_task
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.provider}'s worker, state={self._is_active}, tasks_in_queue={self._requests_queue.qsize()}"
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return (f"ProviderWorker(provider={self.provider}, state={self._is_active},"
                 f" tasks_in_queue={self._requests_queue.qsize()}")

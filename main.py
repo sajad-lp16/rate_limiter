@@ -6,7 +6,7 @@ from utils.router import Router
 from utils.user_prompt import load_config
 
 
-async def main():
+async def main() -> None:
     config = load_config()
     router = Router
 

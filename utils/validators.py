@@ -22,7 +22,7 @@ def is_non_blank_string(value: str) -> tuple[bool, str]:
     return False, "invalid value, [OK: non blank string]"
 
 
-def is_string_key_value_dict(mapper: dict[str, str]):
+def is_string_key_value_dict(mapper: dict[str, str]) -> tuple[bool, str]:
     error = ""
     if not all([isinstance(key, str) for key in mapper.keys()]):
         error += "header keys must be non blank strings"

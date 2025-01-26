@@ -3,13 +3,13 @@ from datetime import datetime
 
 
 class RequestController:
-    def __init__(self, rate_limit: int | float):
+    def __init__(self, rate_limit: int | float) -> None:
         self.request_per_cycle, self.cycle_seconds = self._rate_normalizer(rate_limit)
         self._last_request_time = None
         self._request_counter = 0
 
     @staticmethod
-    def _rate_normalizer(rate_limit: int | float):
+    def _rate_normalizer(rate_limit: int | float) -> tuple[int, int]:
         cycle_seconds = 1
 
         if rate_limit < 1:
@@ -70,8 +70,8 @@ class RequestController:
 
         return (datetime.now() - self._last_request_time).total_seconds()
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.request_per_cycle} requests in {self.cycle_seconds} seconds"
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"RequestController(request_per_cycle={self.request_per_cycle}, cycle_seconds={self.cycle_seconds})"

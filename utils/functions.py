@@ -2,7 +2,7 @@ import json
 from utils.validators import is_colon_separated_key_value
 
 
-def parse_config_file(file_path="config.json") -> dict[str, dict]:
+def parse_config_file(file_path: str = "config.json") -> dict[str, dict]:
     with open(file_path) as file:
         config = json.load(file)
 
@@ -20,7 +20,7 @@ def parse_config_file(file_path="config.json") -> dict[str, dict]:
     return config
 
 
-def parse_headers(value: str):
+def parse_headers(value: str) -> dict:
     assert is_colon_separated_key_value(value)
 
     key_value = value.split(":")

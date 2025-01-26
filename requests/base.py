@@ -7,10 +7,10 @@ from dataclasses import (
 
 
 class Headers(dict):
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash(frozenset(self.items()))
 
-    def __eq__(self, other):
+    def __eq__(self, other: "Headers") -> bool:
         return hash(self) == hash(other)
 
 

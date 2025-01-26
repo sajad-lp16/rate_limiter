@@ -1,14 +1,14 @@
 {
   "P1": {
     "api_endpoint": "https://exmaple1.com",
-    "rate_limit": 100,
+    "rate_limit": 1,
     "headers": {
       "Authorization": "Bearer token1"
     }
   },
   "P2": {
     "api_endpoint": "https://exmaple2.com",
-    "rate_limit": 150,
+    "rate_limit": 1,
     "headers": {
       "Authorization": "Bearer token2"
     }
