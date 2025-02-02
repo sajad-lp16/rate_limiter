@@ -20,7 +20,7 @@ no git repo :)
   - 2 ) the validation is done again here (in case of initiated manually).
   - 3 ) manages the requests queue and inserts the request immediately (the max queue size is respected to avoid memory leaks)
   - 4 ) the provider is responsible for it active state (as the provider switched off, it will stop it worker too).
-  - 5 ) when it gets a task from the queue and the provider turns off, the queue **won't** be missed and it re-queues it back.
+  - 5 ) when it gets a task from the queue and the provider is turned off, the task **won't** be missed, instead it requeues the task back again.
   - 6 ) **Respects** 
     - Request execution time.
     - Request priority.
